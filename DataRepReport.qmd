@@ -1,0 +1,916 @@
+---
+title: "Thompson and Prufer Data Analysis Replication"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+---
+
+# Introduction
+
+Household Inequality, Common Formation, and Land Tenure in Classic Periof Lowland Maya Society
+
+Journal: Journal of Archaeological Method and Theory (2021) 28:1276–1313
+
+Authors:
+
+Amy E. Thompson - Department of Geography and Environmnet, University of Texas at Austin, Austin, TX, USA
+
+Keith M. Prufer - Department of Anthropology, University of New Mexico, Albuquerque, NM, USA DOI: <https://doi.org/10.1007/s10816-020-09505-3>.
+
+## Goal of the Original Paper:
+
+The paper aims to understand how access to social and environmental resources influenced household settlement decisions and contributed to structural inequality at the Classic Period Maya sites of Ix Kuku’il and Uxbenká. It tests two models from human behavioral ecology—Ideal Free Distribution (IFD) and Ideal Despotic Distribution (IDD)—to explain the spatial distribution of households.
+
+## Data Set Used:
+
+The study uses archaeological data from Ix Kuku’il and Uxbenká, including household foundation dates and nine suitability variables representing environmental (e.g., access to water, farmland quality) and social (e.g., access to roads, labor networks) resources.
+
+## Analyses Conducted:
+
+The authors: - Correlate foundation dates with environmental and social suitability scores. - Use spatial analysis to examine settlement patterns. - Evaluate the fit of the IFD vs. IDD models. - Visualize trends in household access to resources over time.
+
+## Analyses I Will Replicate:
+
+I will replicate the analyses associated with:
+
+-   [Figure 7: Sum of settlement dates using AMS 14C]\
+-   [Figure 9: Data Points and Means with Box and Whisker Plot]\
+-   [Figure 10: Frequency Bar Charts]\
+-   [Table 6: Kruskal-Wallis Tests]
+
+These replications will help assess how household access to resources changed over time and whether social inequality became more pronounced.
+
+# Data Replication
+
+# Visualization
+
+## Figure 7: Sum of settlement dates using AMS 14C
+
+Figure 7 is a 2 step process with some work needing to be done outside of R Studio in OxCal.
+
+**OxCal**, is a specialized scripting language used in **Bayesian chronological modeling** of radiocarbon dates. OxCal is widely used in **archaeology** and **paleoclimatology** to build models that integrate radiocarbon dates, stratigraphy, and other chronological constraints.
+
+Create a login: <https://c14.arch.ox.ac.uk/oxcal/OxCal.html>
+
+### Step 1: Create a new project
+
+Select file\>new
+
+an input screen should automatically open if it does not:
+
+### Step 2: Open input screen
+
+View\>Input
+
+![](Images/step2.png){fig-align="center" width="601"}
+
+### Step 3: Open the code screen
+
+View\>Code
+
+![](Images/step3.png){fig-align="center"}
+
+### Step 4: Input code
+
+For this we will use the data file MOESM9.xlsx
+
+We need the columns Lab Number (for identification), C14 date, and the +-
+
+Code for IKK
+
+enter all dates (id, c14, error range)
+
+``` oxcal
+Plot()
+ {
+ };
+ Sequence()
+ {
+  Boundary(IKK All); #IKK boundary
+  Phase(All Dates)
+  { #below enter all dates (id, c14, error range)
+  R_Date("4583", 2065, 20);
+  R_Date("2645", 1605, 20);
+  R_Date("2644", 1490, 20);
+  R_Date("4076", 1220, 20);
+  R_Date("4075", 995, 20);
+  R_Date("4061", 1740, 20);
+  R_Date("170158"   1580    15);
+  R_Date("6739", 1515, 20);
+  R_Date("4059", 1370, 20);
+  R_Date("174065", 1320, 25);
+  R_Date("4060", 1200, 20);
+  R_Date("170156", 1550, 15);
+  R_Date("2643", 1490, 30);
+  R_Date("2662", 1410, 25);
+  R_Date("2642", 1340, 25);
+  R_Date("2654", 1405, 20);
+   Sum(IKK);
+   Order();
+   First();
+   Last();
+   Span(IKK);
+  };
+  Boundary();
+ };
+ Phase(All Dates)
+ {
+ };
+```
+
+Once you enter code, and select the run button
+
+![](Images/Step4.png){fig-align="center"}
+
+After you select run a screen to name your project will pop up, enter name and select run.
+
+### Step 5: Select Graph
+
+Select "view"\>"plot single"
+
+![](Images/Step5.png){fig-align="center"}
+
+### Step 6: Go through figures
+
+You can now go through the graphs and select the one titled "IKK sums"
+
+Your final image should look like this:
+
+![](Images/IXX2.png){fig-align="center"}
+
+Code for UXB
+
+``` oxcal
+Plot()
+ {
+ };
+ Sequence()
+ {
+  Boundary(UXB All);
+  Phase(All Dates)
+  {
+  R_Date("003014", 2116, 26);
+  R_Date("57042", 1960, 20);
+  R_Date("56366", 1865, 15);
+  R_Date("8130", 1900, 20);
+  R_Date("105392", 1845, 15);
+  R_Date("105390", 1740, 15);
+  R_Date("105388", 1605, 15);
+  R_Date("105391", 1465, 15);
+  R_Date("8122", 1835, 20);
+  R_Date("105381", 1775, 15);
+  R_Date("105386", 1770, 15);
+  R_Date("105385", 1740, 15);
+  R_Date("8131", 1805, 25);
+  R_Date("8118", 1775, 25);
+  R_Date("87895", 1775, 20);
+  R_Date("87894", 1565, 20);
+  R_Date("42824", 1775, 15);
+  R_Date("42810", 1365, 15);
+  R_Date("42811", 1275, 15);
+  R_Date("003021", 1760, 26);
+  R_Date("003029", 1668, 26);
+  R_Date("57043", 1485, 15);
+  R_Date("003022", 1333, 26);
+  R_Date("6738", 1330, 20);
+  R_Date("002428", 1758, 25);
+  R_Date("002427", 1703, 28);
+  R_Date("002429", 1688, 28);
+  R_Date("003027", 1550, 24);
+  R_Date("002426", 1534, 28);
+  R_Date("8132", 1510, 20);
+  R_Date("91198", 1755, 15);
+  R_Date("91207", 1710, 15);
+  R_Date("91199", 1700, 15);
+  R_Date("91204", 1625, 15);
+  R_Date("91200", 1610, 15);
+  R_Date("87161", 1605, 15);
+  R_Date("87160", 1595, 15);
+  R_Date("91201", 1585, 15);
+  R_Date("91206", 1580, 15);
+  R_Date("91203", 1570, 15);
+  R_Date("91205", 1525, 15);
+  R_Date("8126", 1725, 30);
+  R_Date("87157", 1725, 15);
+  R_Date("87167", 1575, 15);
+  R_Date("105384", 1720, 15);
+  R_Date("105383", 1580, 15);
+  R_Date("003013", 1690, 26);
+  R_Date("003019", 1687, 25);
+  R_Date("67236", 1615, 20);
+  R_Date("67954", 1465, 15);
+  R_Date("87168", 1580, 15);
+  R_Date("6740", 1515, 25);
+  R_Date("105374", 1510, 15);
+  R_Date("67237", 1440, 20);
+  R_Date("87159", 1380, 15);
+  R_Date("105425", 1320, 20);
+  R_Date("42813", 1320, 15);
+  R_Date("42812", 1310, 15);
+  R_Date("105379", 1290, 15);
+  R_Date("8125", 1280, 20);
+  R_Date("105382", 1255, 15);
+  R_Date("102521", 1250, 15);
+  R_Date("105380", 1220, 15);
+   Sum(UXB);
+   Order();
+   First();
+   Last();
+   Span(UXB);
+  };
+  Boundary();
+ };
+ Phase(All Dates)
+ {
+ };
+```
+
+![](Images/UXB.png){fig-align="center"}
+
+While the author of the paper further manipulated the image in "inkscape" to overlay them on each other we can attempt something similiar in R
+
+I attempted to make the figures transparent and overlay them but the final image resulted in the following:
+
+![](Images/IXX.png1.jpeg){fig-align="center"}
+
+# Descriptive Statistics
+
+## Figure 9: Data Points and Means with Box and Whisker Plot
+
+### Step 1: install packages if needed and load libraries
+
+To replicate you will need the following:
+
+Packages:
+
+-   tidyverse - includes readxl library, dplyr library, and tidyr
+
+-   ggplot2 - includes ggplot2 library
+
+-   ggpubr - includes ggline for mean plots, includes patchwork for plot combination
+
+```{r}
+if (!require("tidyverse")) {install.packages("tidyverse")}
+if (!require("ggplot2")) {install.packages("ggplot2")}
+if (!require("ggpubr")) {install.packages("ggpubr")}
+```
+
+Libraries:
+
+-   readxl - for reading Excel files
+
+-   ggplot2 - for creating plots and visualizations
+
+-   dplyr - for data manipulation (filtering, mutating, etc.)
+
+-   tidyr - for reshaping data (e.g., pivoting)
+
+```{r}
+#load libraries
+library(readxl) # For reading Excel files
+library(ggplot2) # For creating plots and visualizations
+library(dplyr) # For data manipulation (filtering, mutating, etc.)
+library(tidyr) # For reshaping data (e.g., pivoting)
+library(ggpubr) # For creating plots and visualizations
+library(patchwork) # For combining plots
+```
+
+### Step 2: load the MOESM14 dataset and tidyup
+
+You will need the following data located in the "Data" folder
+
+-   MOESM14.xlsx
+
+Some information on reading in excel files: <https://readxl.tidyverse.org/>
+
+```{r}
+ix_data <- read_excel("Data/MOESM14.xlsx") #load in data set
+```
+
+``` r
+head(ix_data) #preview data set to make sure it is loaded in correctly
+```
+
+Now that our data is loaded in we need to make sure it is tidy for manipulating and working with.
+
+To recreate figure 7 we will only need certain variables from the data set:
+
+-   number of structures
+
+-   structure area
+
+-   plazuela area
+
+-   distance to water
+
+-   slope
+
+-   time period
+
+We can call our column names to figure out what we have
+
+``` r
+colnames(ix_data) #call column names
+```
+
+It looks like we have everything we need, however they have different names, make sure you are identifying correctly:
+
+-   number of structures = strs
+
+-   structure area = str_area
+
+-   plazuela area = area
+
+-   distance to water = h20
+
+-   slope = zonal_slope
+
+-   time period = fnd
+
+You can now tidy up your data and keep what you want:
+
+```{r}
+ix_clean <- ix_data |> 
+    mutate(fnd = toupper(fnd)) |> # Convert the 'fnd' column (time periods) to uppercase for consistency
+    filter(fnd %in% c("EC", "LC")) |> 
+    select(strs, str_area, area, h20, zonal_slope, fnd) #select - keep (select) only needed variables for analysis
+```
+
+``` r
+head(ix_clean) #return the first couple of rows to check data
+```
+
+## Patchwork Version
+
+### Step 3: Create your Plots
+
+To create our plots we will use ggplot with NO facet wrap, if you prefer to use face wrap scroll down, however the sizing of each individual plot is not as easily manipulated. You can better manipulate your plot sizes with the patchwork library
+
+We will create plots for a total of 10 plots needed for this figure:
+
+1.  pA1 - Number of Structures against time (mean and error)
+2.  pA2 - Number of Structures against time (boxplot)
+3.  pB1 - Structure Area against time (mean and error)
+4.  pB2 - Structure Area against time (boxplot)
+5.  pC1 - Plazuela Area against time (mean and error)
+6.  pC2 - Plazuela Area against time (boxplot)
+7.  pD1 - Distance to Water against time (mean and error)
+8.  pD2 - Distance to Water against time (boxplot)
+9.  pE1 - Slope against time (mean and error) 10.PE2 - Slope against time (boxplot)
+
+#### Plots A1 and A2 - Number of Structures against Time Period
+
+```{r}
+# mean and error plot
+pA1 <- ggplot(ix_clean, # data for plot
+             aes( x = fnd, # x axis - time period
+                  y = strs)) + # y axis - number of structures
+             geom_jitter(width = 0.1, # distance of points from eachother)'
+                         size = .3) + # size of points
+             stat_summary(fun = mean, geom = "point", size = .3, color = "black") + # mean point
+             stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) + # error bar
+             stat_summary(fun = mean, geom = "line", aes(group =1), color = "black") + # connecting line, connecting group means
+             labs(x = "Time", y = "Number of Structures") + # labels for x and y axis
+             theme_classic() + # classic them has white background
+             theme(axis.title.y=element_text(face="italic"), # italics for y axis
+                   axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pA1
+
+# boxplot
+pA2 <- ggplot(ix_clean, # data for plot
+              aes(x = fnd, # x axis - time period
+                  y = strs)) + # y axis - number of structures 
+       geom_boxplot(outlier.shape = 16, outlier.size = 1, width = 0.5, aes(color = fnd), fill = NA) + # draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent
+       scale_color_manual(values = c("EC" = "skyblue", "LC" = "goldenrod2")) + # specific color for boxplots
+       labs(x = "Time", y = NULL) + # labels for x and y axis
+       theme_classic() + # classic theme for white background
+       theme(legend.position = "none", # removes legend
+             axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pA2              
+```
+
+#### Plots B1 and B2 - Structure Area against Time Period
+
+```{r}
+# mean and error plot
+pB1 <- ggplot(ix_clean, # data for plot
+             aes( x = fnd, # x axis - time period
+                  y = str_area)) + # y axis - number of structures
+             geom_jitter(width = 0.1, # distance of points from eachother)'
+                         size = .3) + # size of points
+             stat_summary(fun = mean, geom = "point", size = .3, color = "black") + # mean point
+             stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) + # error bar
+             stat_summary(fun = mean, geom = "line", aes(group =1), color = "black") + # connecting line, connecting group means
+             labs(x = "Time", y = expression(italic("Structure Area (m"^2*")"))) + # labels for x and y axis
+             theme_classic() + # classic them has white background
+             theme(axis.title.y=element_text(), # italics for y axis
+                   axis.title.x=element_text(face = "italic")) # italics for x axis
+#uncomment to preview plot
+#pB1
+
+#labs(x = "Time", y = expression(italic("Structure Area (m"^2*")")))
+
+# boxplot
+pB2 <- ggplot(ix_clean, # data for plot
+              aes(x = fnd, # x axis - time period
+                  y = str_area)) + # y axis - number of structures 
+       geom_boxplot(outlier.shape = 16, outlier.size = 1, width = 0.5, aes(color = fnd), fill = NA) + # draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent
+       scale_color_manual(values = c("EC" = "skyblue", "LC" = "goldenrod2")) + # specific color for boxplots
+       labs(x = "Time", y = NULL) + # labels for x and y axis
+       theme_classic() + # classic theme for white background
+       theme(legend.position = "none", # removes legend
+             axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pB2                        
+```
+
+#### Plots C1 and C2 - Plazuela Area against Time Period
+
+```{r}
+# mean and error plot
+pC1 <- ggplot(ix_clean, # data for plot
+             aes( x = fnd, # x axis - time period
+                  y = area)) + # y axis - number of structures
+             geom_jitter(width = 0.1, # distance of points from eachother)'
+                         size = .3) + # size of points
+             stat_summary(fun = mean, geom = "point", size = .3, color = "black") + # mean point
+             stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) + # error bar
+             stat_summary(fun = mean, geom = "line", aes(group =1), color = "black") + # connecting line, connecting group means
+             labs(x = "Time", y = expression(italic("Plazuela Area (m"^2*")"))) + # labels for x and y axis
+             theme_classic() + # classic them has white background
+             theme(axis.title.y=element_text(), # italics for y axis
+                   axis.title.x=element_text(face = "italic")) # italics for x axis
+#uncomment to preview plot
+#pC1
+
+#labs(x = "Time", y = expression(italic("Structure Area (m"^2*")")))
+
+# boxplot
+pC2 <- ggplot(ix_clean, # data for plot
+              aes(x = fnd, # x axis - time period
+                  y = area)) + # y axis - number of structures 
+       geom_boxplot(outlier.shape = 16, outlier.size = 1, width = 0.5, aes(color = fnd), fill = NA) + # draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent
+       scale_color_manual(values = c("EC" = "skyblue", "LC" = "goldenrod2")) + # specific color for boxplots
+       labs(x = "Time", y = NULL) + # labels for x and y axis
+       theme_classic() + # classic theme for white background
+       theme(legend.position = "none", # removes legend
+             axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pC2            
+```
+
+#### Plots D1 and D2 - Distance to Water against Time Period
+
+```{r}
+# mean and error plot
+pD1 <- ggplot(ix_clean, # data for plot
+             aes( x = fnd, # x axis - time period
+                  y = h20)) + # y axis - number of structures
+             geom_jitter(width = 0.1, # distance of points from eachother)'
+                         size = .3) + # size of points
+             stat_summary(fun = mean, geom = "point", size = .3, color = "black") + # mean point
+             stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) + # error bar
+             stat_summary(fun = mean, geom = "line", aes(group =1), color = "black") + # connecting line, connecting group means
+             labs(x = "Time", y = "Distance to Water (m)") + # labels for x and y axis
+             theme_classic() + # classic them has white background
+             theme(axis.title.y=element_text(face="italic"), # italics for y axis
+                   axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pD1
+
+# boxplot
+pD2 <- ggplot(ix_clean, # data for plot
+              aes(x = fnd, # x axis - time period
+                  y = h20)) + # y axis - number of structures 
+       geom_boxplot(outlier.shape = 16, outlier.size = 1, width = 0.5, aes(color = fnd), fill = NA) + # draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent
+       scale_color_manual(values = c("EC" = "skyblue", "LC" = "goldenrod2")) + # specific color for boxplots
+       labs(x = "Time", y = NULL) + # labels for x and y axis
+       theme_classic() + # classic theme for white background
+       theme(legend.position = "none", # removes legend
+             axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pD2          
+```
+
+#### Plots E1 and E2 - Slope against Time Period
+
+```{r}
+# mean and error plot
+pE1 <- ggplot(ix_clean, # data for plot
+             aes( x = fnd, # x axis - time period
+                  y = zonal_slope)) + # y axis - number of structures
+             geom_jitter(width = 0.1, # distance of points from eachother)'
+                         size = .3) + # size of points
+             stat_summary(fun = mean, geom = "point", size = .3, color = "black") + # mean point
+             stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) + # error bar
+             stat_summary(fun = mean, geom = "line", aes(group =1), color = "black") + # connecting line, connecting group means
+             labs(x = "Time", y = "Slope (degrees)") + # labels for x and y axis
+             theme_classic() + # classic them has white background
+             theme(axis.title.y=element_text(face="italic"), # italics for y axis
+                   axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pE1
+
+# boxplot
+pE2 <- ggplot(ix_clean, # data for plot
+              aes(x = fnd, # x axis - time period
+                  y = zonal_slope)) + # y axis - number of structures 
+       geom_boxplot(outlier.shape = 10, outlier.size = .5, width = 0.5, aes(color = fnd), fill = NA) + # draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent
+       scale_color_manual(values = c("EC" = "skyblue", "LC" = "goldenrod2")) + # specific color for boxplots
+       labs(x = "Time", y = NULL) + # labels for x and y axis
+       theme_classic() + # classic theme for white background
+       theme(legend.position = "none", # removes legend
+             axis.title.x=element_text(face="italic")) # italics for x axis
+#uncomment to preview plot
+#pE2      
+```
+
+### Step 4: Combine your plots using Patchwork
+
+Now that all our plots are created we will combine them, we will use the patchwork library because this allows us to manipulate each individual graph better
+
+```{r}
+# Combine the plots vertically using patchwork
+# Each row contains two plots side-by-side (e.g., pA1 and pA2 in the first row, pB1 and pB2 in the second, etc.)
+
+figure <- (
+  (pA1 + pA2) /    # First row: plots A1 and A2 side by side
+  (pB1 + pB2) /    # Second row: plots B1 and B2 side by side
+  (pC1 + pC2) /    # Third row: plots C1 and C2 side by side
+  (pD1 + pD2) /    # Fourth row: plots D1 and D2 side by side
+  (pE1 + pE2)      # Fifth row: plots E1 and E2 side by side
+) + 
+  plot_layout(ncol = 1)  # Arrange all the combined rows into a single column (i.e., stack rows vertically)
+```
+
+### Step 5: Save your plot and adjust width and height
+
+``` r
+#save figure and adjust dimensions to look cleaner and like original figure
+ggsave("Images/fig9_patchwork.png", figure, width = 7, height = 10, dpi = 300)
+```
+
+Your final figure should look like this:
+
+![](Images/fig9_patchwork.png){fig-align="center"}
+
+*Figure 9: Data points and means (left) and Box-and-whisker plots with errors and outliers (right) showing the trends in suitability variables over time at Ix Kuku’il. Number of structures (a); structure area (b); plazuela area (c); access to water (d); and lidar derived slope (e)*
+
+## Facetwrap Alternative
+
+### Step 3: Reshape your data
+
+```{r}
+# Reshape data from wide format to long format to prepare for faceted plotting - THIS IS ONLY IF YOU WANT TO CREATE A FACET WRAP
+ix_long <- ix_clean |>
+  pivot_longer(cols = -fnd, # Keep 'fnd' as the identifier column
+               names_to = "Variable", # Combine all other columns into a new column called 'Variable'
+               values_to = "Value") # The values from each variable go into a new column called 'Value'
+
+ix_long$Variable <- factor(ix_long$Variable,
+                           levels = c("strs",
+                                      "str_area",
+                                      "area",
+                                      "h20",
+                                      "zonal_slope"),
+                           labels = c("Number of Structures", "Structure Area m^2", "Plazuela Area", "Distance to Water", "Slope(degrees"))
+```
+
+### Step 4: Create your Plots
+
+#### Left Plot
+
+```{r}
+p_left <- ggplot(ix_long, aes(x = fnd, y = Value)) +                
+  geom_jitter(width = 0.1, # distance of points from eachother
+              size = .3) + # size of points              
+  stat_summary(fun = mean, geom = "point", size = .3, color = "black")+ #mean point   
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +  #error bar  
+  stat_summary(fun = mean, geom = "line", aes(group = 1), color = "gray30") + #connecting line, connecting group means 
+  facet_grid(rows = vars(Variable), # Facetgrid allows tou to combine all your plots from variable
+             switch = "y",
+             scales = "free_y") +
+  labs(x = expression(italic("Time")), y = NULL)+
+  theme_minimal(base_size = 10) +
+  theme(
+    strip.placement = "outside", 
+    strip.text.y.left = element_text(angle = 90, hjust = 0.5), 
+    strip.background = element_blank(),
+    panel.grid = element_blank(),
+    panel.spacing.y = unit(0.3, "lines"),
+    plot.margin = margin(t = 5, r = 5, b = 5, l = 5)
+  )
+#p_left
+```
+
+#### Right Plot
+
+```{r}
+p_right <- ggplot(ix_long, aes(x = fnd, y = Value)) +                # Same structure as left panel
+  geom_boxplot(outlier.shape = 16, outlier.size = .5, width = 0.5,    # Draw boxplots, show outliers as small circles
+               aes(color = fnd), fill = NA) +                        # Outline colored by time period, but box fill left transparent
+  facet_grid(rows = vars(Variable), switch = "y", scales = "free_y") +       
+  labs(x = expression(italic("Time")), y = NULL) +                   # X-axis labeled "Time" in italics
+  scale_color_manual(values = c("EC" = "skyblue", "LC" = "orange")) +# Set custom colors for EC and LC
+  theme_minimal(base_size = 10) + 
+   theme(
+    strip.text.y = element_blank(), 
+    strip.background = element_blank(),
+    panel.grid = element_blank(),# removes the y-axis facet labels
+  )
+#p_right
+```
+
+### Step 5: Combine your left and right plots
+
+```{r}
+final_plot <- p_left + p_right 
+```
+
+### Step 6: Save your plot and adjust width and height
+
+``` r
+ggsave("fig9_facetwrap.png", final_plot, width = 8, height = 10, dpi = 300)
+```
+
+Your final figure should look like this:
+
+![](Images/fig9_facetwrap.png){fig-align="center"}
+
+As you can see even with adjusted margins this version is a bit harder to manipulate. Different adjustments were attempted but none came out as nice as the "patchwork" option. This was the closest I could get to the manipulation using the facetwrap.
+
+## Figure 10: Frequency Bar Charts
+
+### Step 1: install packages if needed and load libraries
+
+To replicate you will need the following:
+
+Libraries:
+
+-   readxl - for reading Excel files
+
+-   dplyr - for data manipulation
+
+-   ggplot2 - for creating data visualizations
+
+-   patchwork - for combining multiple ggplot plots into a single layout
+
+```{r}
+# Load required libraries
+library(readxl)       # For reading Excel files
+library(dplyr)        # For data manipulation (filtering, mutating, etc.)
+library(ggplot2)      # For creating visualizations
+library(patchwork)    # For combining multiple ggplot plots into a single layout
+#install.packages("ggthemes")
+library(ggthemes) # for plot theme
+```
+
+### Step 2: load the needed datasets and tidyup
+
+You will need the following data located in the “Data” folder
+
+-   MOESM13.xlsx
+-   MOESM14.xlsx
+
+```{r}
+ux_data <- read_excel("Data/MOESM13.xlsx")
+ix_data <- read_excel("Data/MOESM14.xlsx") 
+```
+
+### Step 3: Combine the two datasets and create grouping labels
+
+```{r}
+data <- bind_rows(ux_data, ix_data) |> # Merge the two datasets into one
+  mutate(
+    fnd = toupper(fnd), # Standardize time period column to uppercase, should already be done but just in case
+    site_fnd = paste(site, fnd) # Create a combined label of site and time 
+  )
+```
+
+### Step 4: Recode the bedrock codes from numbers to names
+
+```{r}
+bedrock_lut <- c("1" = "mudstone", "2" = "mixed")  # Define lookup table for bedrock codes
+
+data <- data |>
+  mutate(
+    bedrock_label = factor(bedrock_lut[as.character(bedrock2)], # Apply lookup table
+                           levels = c("mixed", "mudstone")), # Set display order 
+    erosion = as.factor(erosion), # Convert erosion values to categorical
+    soil_s = as.factor(soil_s)  # Convert soil classification codes to categorical
+  )
+```
+
+### Step 5: Create your plots
+
+We will create plots for a total of 3 plots needed for this figure:
+
+1.  p1 - Bedrock Frequencies
+2.  p2 - Soil Classification Frequencies
+3.  p3 - Erosion Frequencies \#### Plot 1
+
+```{r}
+# Ensure all combinations of site_fnd and bedrock_label exist
+df_plot1 <- data |>
+  filter(!is.na(bedrock_label)) |>
+  count(site_fnd, bedrock_label) |>
+  complete(site_fnd, bedrock_label, fill = list(n = 0))  # Fill missing combos with 0, this ensures that all your bars in your plot are the same width even if they dont have pairs
+
+df_plot1$site_fnd <- factor(df_plot1$site_fnd, levels = c("IKK EC", "IKK LC", "UXB LPC", "UXB EC", "UXB LC"))
+
+
+p1 <- ggplot(df_plot1, aes(x = site_fnd, y = n, fill = bedrock_label)) +
+  geom_col(position = position_dodge(width = 0.4), width = 0.3) +
+  scale_fill_manual(values = c("mudstone" = "grey70", "mixed" = "steelblue")) + # custom colors for bars
+  labs(title = "Bedrock Frequencies", x = NULL, y = "Number of Occurrences", fill = NULL) + 
+  theme_hc(base_size = 10) +
+  theme(axis.text.x = element_text(angle = 0, size = 8),
+        plot.title = element_text(hjust = 0.5),
+        legend.text = element_text(size=8)) 
+```
+
+```{r}
+df_plot2 <- data |>
+  filter(!is.na(soil_s)) |> # Exclude missing soil classification values
+  count(site_fnd, soil_s) |> # Count frequency of each soil type by site and time
+  complete(site_fnd, soil_s, fill = list(n=0))
+
+df_plot2$site_fnd <- factor(df_plot2$site_fnd, levels = c("IKK EC", "IKK LC", "UXB LPC", "UXB EC", "UXB LC"))
+
+p2 <- ggplot(df_plot2, aes(x = site_fnd, y = n, fill = soil_s)) +  # Plot frequency by site/time and soil class
+  geom_col(position = position_dodge(width = 0.6), width = 0.5) +  
+  scale_fill_manual(values = c("25" = "darkorange",    # Brown for soil class 25
+                               "26" = "goldenrod2",    # Yellow for 26
+                               "29" = "forestgreen",    # Green for 29
+                               "63" = "tomato4")) +
+  labs(title = "Soil Classification Frequencies", x = NULL, y = "Number of Occurrences", fill = NULL) +  # Add plot labels
+  theme_hc(base_size = 10) +
+  theme(axis.text.x = element_text(angle = 0, size = 8),
+        plot.title = element_text(hjust = 0.5),
+        legend.text = element_text(size=8)) 
+```
+
+```{r}
+df_plot3 <- data |>
+  filter(!is.na(erosion)) |> # Exclude missing erosion values
+  count(site_fnd, erosion) |> # Count number of observations per erosion level 
+    complete(site_fnd, erosion, fill = list(n=0))
+
+df_plot3$site_fnd <- factor(df_plot3$site_fnd, levels = c("IKK EC", "IKK LC", "UXB LPC", "UXB EC", "UXB LC"))
+
+p3 <- ggplot(df_plot3, aes(x = site_fnd, y = n, fill = erosion)) + # Begin plot 
+  geom_col(position = position_dodge(width = 0.6), width = 0.5) + # Bar plot 
+  scale_fill_manual(values = c("2" = "forestgreen", 
+                               "3" = "royalblue3",    
+                               "4" = "goldenrod2")) + 
+  labs(title = "Erosion Frequencies", x = NULL, y = "Number of Occurrences", fill = NULL) +  # Set title and axis labels
+  theme_hc(base_size = 10) +
+  theme(axis.text.x = element_text(angle = 0, size = 8),
+        plot.title = element_text(hjust = 0.5),
+        legend.text = element_text(size=8)) 
+```
+
+```{r}
+# Combine plots
+final_plot <- (p1 | p2 | p3)
+```
+
+``` r
+ggsave("Images/fig10.png", final_plot, width = 15, height = 8, dpi = 300)
+```
+
+Your final image should look like this:
+
+![](Images/fig10.png){fig-align="center"}
+
+# Inferential Statistics
+
+## Table 6: Kruskal-Wallis Tests
+
+### Step 1: install packages if needed and load libraries
+
+To replicate you will need the following:
+
+Libraries:
+
+-   readxl - for reading Excel files
+
+-   dplyr - for data manipulation
+
+```{r}
+# Load libraries
+library(readxl)   # For reading Excel spreadsheet files
+library(dplyr)    # For data manipulation (filtering, mutating, etc.)
+library(ggplot2) # for additional plot
+library(tidyr)
+```
+
+### Step 2: load the MOESM14 dataset and tidyup
+
+You will need the following data located in the “Data” folder
+
+-   MOESM13.xlsx
+-   MOESM14.xlsx
+
+```{r}
+ux_data <- read_excel("Data/MOESM13.xlsx")
+ix_data <- read_excel("Data/MOESM14.xlsx") 
+```
+
+Once your data is loaded we can tidy it up:
+
+```{r}
+ux_clean <- ux_data |> # Load data from Excel file for Uxbenká
+           mutate(fnd = toupper(fnd)) %>% # Standardize 'fnd' column by converting to uppercase
+           filter(fnd %in% c("LPC", "EC", "LC")) # Convert the 'fnd' (chronological phase) column to uppercase
+ix_clean <-  ix_data |>
+             mutate(fnd = toupper(fnd)) |> # Convert the 'fnd' (chronological phase) column to uppercase
+             filter(fnd %in% c("LPC", "EC", "LC"))   
+```
+
+### Step 3: Define Variables to Test
+
+```{r}
+variables <- c("strs", "str_area", "area", "h20", "zonal_slope")
+var_names <- c("Number of structures",
+               "Total area of structures",
+               "Plazuela area",
+               "Distance to water",
+               "Zonal slope")
+```
+
+### Step 4: Create a function to Run Kruskal-Wallis Tests for a Dataset
+
+```{r}
+run_kw_tests <- function(data, var_list, group_var = "fnd") {
+  sapply(var_list, function(var) {
+    kruskal.test(as.formula(paste(var, "~", group_var)), data = data)$p.value
+  })
+}
+```
+
+### Step 5: Run Tests for Ix Kuku’il and Uxbenká
+
+```{r}
+kw_ix_vals <- run_kw_tests(ix_data, variables)
+kw_ux_vals <- run_kw_tests(ux_data, variables)
+```
+
+### Step 6: Create Final Combined Results Table
+
+```{r}
+kw_table <- data.frame(
+  Variable = var_names,
+  "Uxbenká p-value" = kw_ux_vals,
+  "Ix Kuku’il p-value" = kw_ix_vals,
+  check.names = FALSE
+)
+```
+
+### Step 7: Optional: Display as a Formatted Table Using knitr
+
+```{r}
+library(knitr) # Load knitr for table formatting
+kable_final <- kable(kw_table, row.names = FALSE, caption = "Table 6: Kruskal-Wallis p-values for Ix Kuku’il and Uxbenká")
+```
+
+``` r
+kable_final
+```
+
+Your final output table should look like this:
+
+Table 6: *Kruskal-Wallis results. Italicized values are statistically significant (p \< 0.05)*
+
+![](Images/table6.png)
+
+While there is no plot or graphic other than a table to represent this in the paper, we can easily create one using ggplot and the table we created like we have earlier in the data analysis replication process.
+
+```{r}
+# Create the data
+df <- kw_table
+
+# Reshape for plotting
+df_long <- df |>
+  pivot_longer(cols = c("Uxbenká p-value", "Ix Kuku’il p-value"), names_to = "Site", values_to = "p_value")
+
+# Plot
+ggplot(df_long, aes(x = p_value, y = Variable, color = Site, shape = Site)) +
+  geom_point(size = 3) +
+  geom_vline(xintercept = 0.05, linetype = "dashed", color = "red") +
+  scale_x_continuous(name = "p-value", limits = c(0, 1)) +
+  theme_minimal() +
+  labs(title = "Kruskal-Wallis p-values by Variable and Site") +
+  theme(legend.position = "top")
+
+```
+
+![]()

@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Thompson and Prufer Data Analysis Replication</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="DataRepReport_files/libs/clipboard/clipboard.min.js"></script>
+<script src="DataRepReport_files/libs/quarto-html/quarto.js"></script>
+<script src="DataRepReport_files/libs/quarto-html/popper.min.js"></script>
+<script src="DataRepReport_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="DataRepReport_files/libs/quarto-html/anchor.min.js"></script>
+<link href="DataRepReport_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="DataRepReport_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="DataRepReport_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="DataRepReport_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="DataRepReport_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Thompson and Prufer Data Analysis Replication</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Household Inequality, Common Formation, and Land Tenure in Classic Periof Lowland Maya Society</p>
+<p>Journal: Journal of Archaeological Method and Theory (2021) 28:1276–1313</p>
+<p>Authors:</p>
+<p>Amy E. Thompson - Department of Geography and Environmnet, University of Texas at Austin, Austin, TX, USA</p>
+<p>Keith M. Prufer - Department of Anthropology, University of New Mexico, Albuquerque, NM, USA DOI: <a href="https://doi.org/10.1007/s10816-020-09505-3" class="uri">https://doi.org/10.1007/s10816-020-09505-3</a>.</p>
+<section id="goal-of-the-original-paper" class="level2">
+<h2 class="anchored" data-anchor-id="goal-of-the-original-paper">Goal of the Original Paper:</h2>
+<p>The paper aims to understand how access to social and environmental resources influenced household settlement decisions and contributed to structural inequality at the Classic Period Maya sites of Ix Kuku’il and Uxbenká. It tests two models from human behavioral ecology—Ideal Free Distribution (IFD) and Ideal Despotic Distribution (IDD)—to explain the spatial distribution of households.</p>
+</section>
+<section id="data-set-used" class="level2">
+<h2 class="anchored" data-anchor-id="data-set-used">Data Set Used:</h2>
+<p>The study uses archaeological data from Ix Kuku’il and Uxbenká, including household foundation dates and nine suitability variables representing environmental (e.g., access to water, farmland quality) and social (e.g., access to roads, labor networks) resources.</p>
+</section>
+<section id="analyses-conducted" class="level2">
+<h2 class="anchored" data-anchor-id="analyses-conducted">Analyses Conducted:</h2>
+<p>The authors: - Correlate foundation dates with environmental and social suitability scores. - Use spatial analysis to examine settlement patterns. - Evaluate the fit of the IFD vs.&nbsp;IDD models. - Visualize trends in household access to resources over time.</p>
+</section>
+<section id="analyses-i-will-replicate" class="level2">
+<h2 class="anchored" data-anchor-id="analyses-i-will-replicate">Analyses I Will Replicate:</h2>
+<p>I will replicate the analyses associated with:</p>
+<ul>
+<li><a href="#figure-7-sum-of-settlement-dates-using-ams-14c">Figure 7: Sum of settlement dates using AMS 14C</a><br>
+</li>
+<li><a href="#figure-9-data-points-and-means-with-box-and-whisker-plot">Figure 9: Data Points and Means with Box and Whisker Plot</a><br>
+</li>
+<li><a href="#figure-10-frequency-bar-charts">Figure 10: Frequency Bar Charts</a><br>
+</li>
+<li><a href="#table-6-kruskal-wallis-tests">Table 6: Kruskal-Wallis Tests</a></li>
+</ul>
+<p>These replications will help assess how household access to resources changed over time and whether social inequality became more pronounced.</p>
+</section>
+</section>
+<section id="data-replication" class="level1">
+<h1>Data Replication</h1>
+</section>
+<section id="visualization" class="level1">
+<h1>Visualization</h1>
+<section id="figure-7-sum-of-settlement-dates-using-ams-14c" class="level2">
+<h2 class="anchored" data-anchor-id="figure-7-sum-of-settlement-dates-using-ams-14c">Figure 7: Sum of settlement dates using AMS 14C</h2>
+<p>Figure 7 is a 2 step process with some work needing to be done outside of R Studio in OxCal.</p>
+<p><strong>OxCal</strong>, is a specialized scripting language used in <strong>Bayesian chronological modeling</strong> of radiocarbon dates. OxCal is widely used in <strong>archaeology</strong> and <strong>paleoclimatology</strong> to build models that integrate radiocarbon dates, stratigraphy, and other chronological constraints.</p>
+<p>Create a login: <a href="https://c14.arch.ox.ac.uk/oxcal/OxCal.html" class="uri">https://c14.arch.ox.ac.uk/oxcal/OxCal.html</a></p>
+<section id="step-1-create-a-new-project" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-a-new-project">Step 1: Create a new project</h3>
+<p>Select file&gt;new</p>
+<p>an input screen should automatically open if it does not:</p>
+</section>
+<section id="step-2-open-input-screen" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-open-input-screen">Step 2: Open input screen</h3>
+<p>View&gt;Input</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/step2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="601"></p>
+</figure>
+</div>
+</section>
+<section id="step-3-open-the-code-screen" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-open-the-code-screen">Step 3: Open the code screen</h3>
+<p>View&gt;Code</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/step3.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="step-4-input-code" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-input-code">Step 4: Input code</h3>
+<p>For this we will use the data file MOESM9.xlsx</p>
+<p>We need the columns Lab Number (for identification), C14 date, and the +-</p>
+<p>Code for IKK</p>
+<p>enter all dates (id, c14, error range)</p>
+<pre class="oxcal"><code>Plot()
+ {
+ };
+ Sequence()
+ {
+  Boundary(IKK All); #IKK boundary
+  Phase(All Dates)
+  { #below enter all dates (id, c14, error range)
+  R_Date("4583", 2065, 20);
+  R_Date("2645", 1605, 20);
+  R_Date("2644", 1490, 20);
+  R_Date("4076", 1220, 20);
+  R_Date("4075", 995, 20);
+  R_Date("4061", 1740, 20);
+  R_Date("170158"   1580    15);
+  R_Date("6739", 1515, 20);
+  R_Date("4059", 1370, 20);
+  R_Date("174065", 1320, 25);
+  R_Date("4060", 1200, 20);
+  R_Date("170156", 1550, 15);
+  R_Date("2643", 1490, 30);
+  R_Date("2662", 1410, 25);
+  R_Date("2642", 1340, 25);
+  R_Date("2654", 1405, 20);
+   Sum(IKK);
+   Order();
+   First();
+   Last();
+   Span(IKK);
+  };
+  Boundary();
+ };
+ Phase(All Dates)
+ {
+ };</code></pre>
+<p>Once you enter code, and select the run button</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/Step4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>After you select run a screen to name your project will pop up, enter name and select run.</p>
+</section>
+<section id="step-5-select-graph" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-select-graph">Step 5: Select Graph</h3>
+<p>Select “view”&gt;“plot single”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/Step5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="step-6-go-through-figures" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-go-through-figures">Step 6: Go through figures</h3>
+<p>You can now go through the graphs and select the one titled “IKK sums”</p>
+<p>Your final image should look like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/IXX2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Code for UXB</p>
+<pre class="oxcal"><code>Plot()
+ {
+ };
+ Sequence()
+ {
+  Boundary(UXB All);
+  Phase(All Dates)
+  {
+  R_Date("003014", 2116, 26);
+  R_Date("57042", 1960, 20);
+  R_Date("56366", 1865, 15);
+  R_Date("8130", 1900, 20);
+  R_Date("105392", 1845, 15);
+  R_Date("105390", 1740, 15);
+  R_Date("105388", 1605, 15);
+  R_Date("105391", 1465, 15);
+  R_Date("8122", 1835, 20);
+  R_Date("105381", 1775, 15);
+  R_Date("105386", 1770, 15);
+  R_Date("105385", 1740, 15);
+  R_Date("8131", 1805, 25);
+  R_Date("8118", 1775, 25);
+  R_Date("87895", 1775, 20);
+  R_Date("87894", 1565, 20);
+  R_Date("42824", 1775, 15);
+  R_Date("42810", 1365, 15);
+  R_Date("42811", 1275, 15);
+  R_Date("003021", 1760, 26);
+  R_Date("003029", 1668, 26);
+  R_Date("57043", 1485, 15);
+  R_Date("003022", 1333, 26);
+  R_Date("6738", 1330, 20);
+  R_Date("002428", 1758, 25);
+  R_Date("002427", 1703, 28);
+  R_Date("002429", 1688, 28);
+  R_Date("003027", 1550, 24);
+  R_Date("002426", 1534, 28);
+  R_Date("8132", 1510, 20);
+  R_Date("91198", 1755, 15);
+  R_Date("91207", 1710, 15);
+  R_Date("91199", 1700, 15);
+  R_Date("91204", 1625, 15);
+  R_Date("91200", 1610, 15);
+  R_Date("87161", 1605, 15);
+  R_Date("87160", 1595, 15);
+  R_Date("91201", 1585, 15);
+  R_Date("91206", 1580, 15);
+  R_Date("91203", 1570, 15);
+  R_Date("91205", 1525, 15);
+  R_Date("8126", 1725, 30);
+  R_Date("87157", 1725, 15);
+  R_Date("87167", 1575, 15);
+  R_Date("105384", 1720, 15);
+  R_Date("105383", 1580, 15);
+  R_Date("003013", 1690, 26);
+  R_Date("003019", 1687, 25);
+  R_Date("67236", 1615, 20);
+  R_Date("67954", 1465, 15);
+  R_Date("87168", 1580, 15);
+  R_Date("6740", 1515, 25);
+  R_Date("105374", 1510, 15);
+  R_Date("67237", 1440, 20);
+  R_Date("87159", 1380, 15);
+  R_Date("105425", 1320, 20);
+  R_Date("42813", 1320, 15);
+  R_Date("42812", 1310, 15);
+  R_Date("105379", 1290, 15);
+  R_Date("8125", 1280, 20);
+  R_Date("105382", 1255, 15);
+  R_Date("102521", 1250, 15);
+  R_Date("105380", 1220, 15);
+   Sum(UXB);
+   Order();
+   First();
+   Last();
+   Span(UXB);
+  };
+  Boundary();
+ };
+ Phase(All Dates)
+ {
+ };</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/UXB.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>While the author of the paper further manipulated the image in “inkscape” to overlay them on each other we can attempt something similiar in R</p>
+<p>I attempted to make the figures transparent and overlay them but the final image resulted in the following:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/IXX.png1.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="descriptive-statistics" class="level1">
+<h1>Descriptive Statistics</h1>
+<section id="figure-9-data-points-and-means-with-box-and-whisker-plot" class="level2">
+<h2 class="anchored" data-anchor-id="figure-9-data-points-and-means-with-box-and-whisker-plot">Figure 9: Data Points and Means with Box and Whisker Plot</h2>
+<section id="step-1-install-packages-if-needed-and-load-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-install-packages-if-needed-and-load-libraries">Step 1: install packages if needed and load libraries</h3>
+<p>To replicate you will need the following:</p>
+<p>Packages:</p>
+<ul>
+<li><p>tidyverse - includes readxl library, dplyr library, and tidyr</p></li>
+<li><p>ggplot2 - includes ggplot2 library</p></li>
+<li><p>ggpubr - includes ggline for mean plots, includes patchwork for plot combination</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tidyverse"</span>)) {<span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: tidyverse</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"ggplot2"</span>)) {<span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"ggpubr"</span>)) {<span class="fu">install.packages</span>(<span class="st">"ggpubr"</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggpubr</code></pre>
+</div>
+</div>
+<p>Libraries:</p>
+<ul>
+<li><p>readxl - for reading Excel files</p></li>
+<li><p>ggplot2 - for creating plots and visualizations</p></li>
+<li><p>dplyr - for data manipulation (filtering, mutating, etc.)</p></li>
+<li><p>tidyr - for reshaping data (e.g., pivoting)</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load libraries</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># For reading Excel files</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># For creating plots and visualizations</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># For data manipulation (filtering, mutating, etc.)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co"># For reshaping data (e.g., pivoting)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr) <span class="co"># For creating plots and visualizations</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork) <span class="co"># For combining plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-load-the-moesm14-dataset-and-tidyup" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-load-the-moesm14-dataset-and-tidyup">Step 2: load the MOESM14 dataset and tidyup</h3>
+<p>You will need the following data located in the “Data” folder</p>
+<ul>
+<li>MOESM14.xlsx</li>
+</ul>
+<p>Some information on reading in excel files: <a href="https://readxl.tidyverse.org/" class="uri">https://readxl.tidyverse.org/</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ix_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/MOESM14.xlsx"</span>) <span class="co">#load in data set</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ix_data) <span class="co">#preview data set to make sure it is loaded in correctly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now that our data is loaded in we need to make sure it is tidy for manipulating and working with.</p>
+<p>To recreate figure 7 we will only need certain variables from the data set:</p>
+<ul>
+<li><p>number of structures</p></li>
+<li><p>structure area</p></li>
+<li><p>plazuela area</p></li>
+<li><p>distance to water</p></li>
+<li><p>slope</p></li>
+<li><p>time period</p></li>
+</ul>
+<p>We can call our column names to figure out what we have</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ix_data) <span class="co">#call column names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It looks like we have everything we need, however they have different names, make sure you are identifying correctly:</p>
+<ul>
+<li><p>number of structures = strs</p></li>
+<li><p>structure area = str_area</p></li>
+<li><p>plazuela area = area</p></li>
+<li><p>distance to water = h20</p></li>
+<li><p>slope = zonal_slope</p></li>
+<li><p>time period = fnd</p></li>
+</ul>
+<p>You can now tidy up your data and keep what you want:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ix_clean <span class="ot">&lt;-</span> ix_data <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fnd =</span> <span class="fu">toupper</span>(fnd)) <span class="sc">|&gt;</span> <span class="co"># Convert the 'fnd' column (time periods) to uppercase for consistency</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(fnd <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"EC"</span>, <span class="st">"LC"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(strs, str_area, area, h20, zonal_slope, fnd) <span class="co">#select - keep (select) only needed variables for analysis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ix_clean) <span class="co">#return the first couple of rows to check data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="patchwork-version" class="level2">
+<h2 class="anchored" data-anchor-id="patchwork-version">Patchwork Version</h2>
+<section id="step-3-create-your-plots" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-create-your-plots">Step 3: Create your Plots</h3>
+<p>To create our plots we will use ggplot with NO facet wrap, if you prefer to use face wrap scroll down, however the sizing of each individual plot is not as easily manipulated. You can better manipulate your plot sizes with the patchwork library</p>
+<p>We will create plots for a total of 10 plots needed for this figure:</p>
+<ol type="1">
+<li>pA1 - Number of Structures against time (mean and error)</li>
+<li>pA2 - Number of Structures against time (boxplot)</li>
+<li>pB1 - Structure Area against time (mean and error)</li>
+<li>pB2 - Structure Area against time (boxplot)</li>
+<li>pC1 - Plazuela Area against time (mean and error)</li>
+<li>pC2 - Plazuela Area against time (boxplot)</li>
+<li>pD1 - Distance to Water against time (mean and error)</li>
+<li>pD2 - Distance to Water against time (boxplot)</li>
+<li>pE1 - Slope against time (mean and error) 10.PE2 - Slope against time (boxplot)</li>
+</ol>
+<section id="plots-a1-and-a2---number-of-structures-against-time-period" class="level4">
+<h4 class="anchored" data-anchor-id="plots-a1-and-a2---number-of-structures-against-time-period">Plots A1 and A2 - Number of Structures against Time Period</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean and error plot</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pA1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>( <span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> strs)) <span class="sc">+</span> <span class="co"># y axis - number of structures</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># distance of points from eachother)'</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">size =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="co"># size of points</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> .<span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># mean point</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># error bar</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span><span class="dv">1</span>), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># connecting line, connecting group means</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="st">"Number of Structures"</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic them has white background</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="co"># italics for y axis</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#pA1</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>pA2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> strs)) <span class="sc">+</span> <span class="co"># y axis - number of structures </span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">16</span>, <span class="at">outlier.size =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="fu">aes</span>(<span class="at">color =</span> fnd), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>       <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EC"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, <span class="st">"LC"</span> <span class="ot">=</span> <span class="st">"goldenrod2"</span>)) <span class="sc">+</span> <span class="co"># specific color for boxplots</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic theme for white background</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># removes legend</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#pA2              </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plots-b1-and-b2---structure-area-against-time-period" class="level4">
+<h4 class="anchored" data-anchor-id="plots-b1-and-b2---structure-area-against-time-period">Plots B1 and B2 - Structure Area against Time Period</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean and error plot</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pB1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>( <span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> str_area)) <span class="sc">+</span> <span class="co"># y axis - number of structures</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># distance of points from eachother)'</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">size =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="co"># size of points</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> .<span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># mean point</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># error bar</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span><span class="dv">1</span>), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># connecting line, connecting group means</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">italic</span>(<span class="st">"Structure Area (m"</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="st">")"</span>))) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic them has white background</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_text</span>(), <span class="co"># italics for y axis</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#pB1</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#labs(x = "Time", y = expression(italic("Structure Area (m"^2*")")))</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>pB2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> str_area)) <span class="sc">+</span> <span class="co"># y axis - number of structures </span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">16</span>, <span class="at">outlier.size =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="fu">aes</span>(<span class="at">color =</span> fnd), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EC"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, <span class="st">"LC"</span> <span class="ot">=</span> <span class="st">"goldenrod2"</span>)) <span class="sc">+</span> <span class="co"># specific color for boxplots</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic theme for white background</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># removes legend</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co">#pB2                        </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plots-c1-and-c2---plazuela-area-against-time-period" class="level4">
+<h4 class="anchored" data-anchor-id="plots-c1-and-c2---plazuela-area-against-time-period">Plots C1 and C2 - Plazuela Area against Time Period</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean and error plot</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pC1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>( <span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> area)) <span class="sc">+</span> <span class="co"># y axis - number of structures</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># distance of points from eachother)'</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">size =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="co"># size of points</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> .<span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># mean point</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># error bar</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span><span class="dv">1</span>), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># connecting line, connecting group means</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">italic</span>(<span class="st">"Plazuela Area (m"</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="st">")"</span>))) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic them has white background</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_text</span>(), <span class="co"># italics for y axis</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#pC1</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#labs(x = "Time", y = expression(italic("Structure Area (m"^2*")")))</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>pC2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> area)) <span class="sc">+</span> <span class="co"># y axis - number of structures </span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">16</span>, <span class="at">outlier.size =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="fu">aes</span>(<span class="at">color =</span> fnd), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EC"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, <span class="st">"LC"</span> <span class="ot">=</span> <span class="st">"goldenrod2"</span>)) <span class="sc">+</span> <span class="co"># specific color for boxplots</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic theme for white background</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># removes legend</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#pC2            </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plots-d1-and-d2---distance-to-water-against-time-period" class="level4">
+<h4 class="anchored" data-anchor-id="plots-d1-and-d2---distance-to-water-against-time-period">Plots D1 and D2 - Distance to Water against Time Period</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean and error plot</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pD1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>( <span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> h20)) <span class="sc">+</span> <span class="co"># y axis - number of structures</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># distance of points from eachother)'</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">size =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="co"># size of points</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> .<span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># mean point</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># error bar</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span><span class="dv">1</span>), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># connecting line, connecting group means</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="st">"Distance to Water (m)"</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic them has white background</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="co"># italics for y axis</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#pD1</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>pD2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> h20)) <span class="sc">+</span> <span class="co"># y axis - number of structures </span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">16</span>, <span class="at">outlier.size =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="fu">aes</span>(<span class="at">color =</span> fnd), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>       <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EC"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, <span class="st">"LC"</span> <span class="ot">=</span> <span class="st">"goldenrod2"</span>)) <span class="sc">+</span> <span class="co"># specific color for boxplots</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic theme for white background</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># removes legend</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">#pD2          </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plots-e1-and-e2---slope-against-time-period" class="level4">
+<h4 class="anchored" data-anchor-id="plots-e1-and-e2---slope-against-time-period">Plots E1 and E2 - Slope against Time Period</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean and error plot</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pE1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>( <span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> zonal_slope)) <span class="sc">+</span> <span class="co"># y axis - number of structures</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># distance of points from eachother)'</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">size =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="co"># size of points</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> .<span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># mean point</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># error bar</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span><span class="dv">1</span>), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># connecting line, connecting group means</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="st">"Slope (degrees)"</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic them has white background</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="co"># italics for y axis</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#pE1</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>pE2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_clean, <span class="co"># data for plot</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> fnd, <span class="co"># x axis - time period</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> zonal_slope)) <span class="sc">+</span> <span class="co"># y axis - number of structures </span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">10</span>, <span class="at">outlier.size =</span> .<span class="dv">5</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="fu">aes</span>(<span class="at">color =</span> fnd), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># draw boxplots, show outliers as small circles, outline colored by time period but box fill transparent</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>       <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EC"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, <span class="st">"LC"</span> <span class="ot">=</span> <span class="st">"goldenrod2"</span>)) <span class="sc">+</span> <span class="co"># specific color for boxplots</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="co"># labels for x and y axis</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># classic theme for white background</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># removes legend</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>)) <span class="co"># italics for x axis</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#uncomment to preview plot</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#pE2      </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="step-4-combine-your-plots-using-patchwork" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-combine-your-plots-using-patchwork">Step 4: Combine your plots using Patchwork</h3>
+<p>Now that all our plots are created we will combine them, we will use the patchwork library because this allows us to manipulate each individual graph better</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the plots vertically using patchwork</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Each row contains two plots side-by-side (e.g., pA1 and pA2 in the first row, pB1 and pB2 in the second, etc.)</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>figure <span class="ot">&lt;-</span> (</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  (pA1 <span class="sc">+</span> pA2) <span class="sc">/</span>    <span class="co"># First row: plots A1 and A2 side by side</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  (pB1 <span class="sc">+</span> pB2) <span class="sc">/</span>    <span class="co"># Second row: plots B1 and B2 side by side</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  (pC1 <span class="sc">+</span> pC2) <span class="sc">/</span>    <span class="co"># Third row: plots C1 and C2 side by side</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  (pD1 <span class="sc">+</span> pD2) <span class="sc">/</span>    <span class="co"># Fourth row: plots D1 and D2 side by side</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  (pE1 <span class="sc">+</span> pE2)      <span class="co"># Fifth row: plots E1 and E2 side by side</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>)  <span class="co"># Arrange all the combined rows into a single column (i.e., stack rows vertically)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-5-save-your-plot-and-adjust-width-and-height" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-save-your-plot-and-adjust-width-and-height">Step 5: Save your plot and adjust width and height</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#save figure and adjust dimensions to look cleaner and like original figure</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"Images/fig9_patchwork.png"</span>, figure, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your final figure should look like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/fig9_patchwork.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><em>Figure 9: Data points and means (left) and Box-and-whisker plots with errors and outliers (right) showing the trends in suitability variables over time at Ix Kuku’il. Number of structures (a); structure area (b); plazuela area (c); access to water (d); and lidar derived slope (e)</em></p>
+</section>
+</section>
+<section id="facetwrap-alternative" class="level2">
+<h2 class="anchored" data-anchor-id="facetwrap-alternative">Facetwrap Alternative</h2>
+<section id="step-3-reshape-your-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-reshape-your-data">Step 3: Reshape your data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape data from wide format to long format to prepare for faceted plotting - THIS IS ONLY IF YOU WANT TO CREATE A FACET WRAP</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ix_long <span class="ot">&lt;-</span> ix_clean <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>fnd, <span class="co"># Keep 'fnd' as the identifier column</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="co"># Combine all other columns into a new column called 'Variable'</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="co"># The values from each variable go into a new column called 'Value'</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>ix_long<span class="sc">$</span>Variable <span class="ot">&lt;-</span> <span class="fu">factor</span>(ix_long<span class="sc">$</span>Variable,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"strs"</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"str_area"</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"area"</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"h20"</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"zonal_slope"</span>),</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Number of Structures"</span>, <span class="st">"Structure Area m^2"</span>, <span class="st">"Plazuela Area"</span>, <span class="st">"Distance to Water"</span>, <span class="st">"Slope(degrees"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-4-create-your-plots" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-create-your-plots">Step 4: Create your Plots</h3>
+<section id="left-plot" class="level4">
+<h4 class="anchored" data-anchor-id="left-plot">Left Plot</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p_left <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_long, <span class="fu">aes</span>(<span class="at">x =</span> fnd, <span class="at">y =</span> Value)) <span class="sc">+</span>                </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># distance of points from eachother</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="co"># size of points              </span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> .<span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span> <span class="co">#mean point   </span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span>  <span class="co">#error bar  </span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span> <span class="co">#connecting line, connecting group means </span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(Variable), <span class="co"># Facetgrid allows tou to combine all your plots from variable</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">switch =</span> <span class="st">"y"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">italic</span>(<span class="st">"Time"</span>)), <span class="at">y =</span> <span class="cn">NULL</span>)<span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.placement =</span> <span class="st">"outside"</span>, </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text.y.left =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>), </span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.spacing.y =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"lines"</span>),</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>, <span class="at">r =</span> <span class="dv">5</span>, <span class="at">b =</span> <span class="dv">5</span>, <span class="at">l =</span> <span class="dv">5</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co">#p_left</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="right-plot" class="level4">
+<h4 class="anchored" data-anchor-id="right-plot">Right Plot</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p_right <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ix_long, <span class="fu">aes</span>(<span class="at">x =</span> fnd, <span class="at">y =</span> Value)) <span class="sc">+</span>                <span class="co"># Same structure as left panel</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">16</span>, <span class="at">outlier.size =</span> .<span class="dv">5</span>, <span class="at">width =</span> <span class="fl">0.5</span>,    <span class="co"># Draw boxplots, show outliers as small circles</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">color =</span> fnd), <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span>                        <span class="co"># Outline colored by time period, but box fill left transparent</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(Variable), <span class="at">switch =</span> <span class="st">"y"</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span>       </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">italic</span>(<span class="st">"Time"</span>)), <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span>                   <span class="co"># X-axis labeled "Time" in italics</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EC"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, <span class="st">"LC"</span> <span class="ot">=</span> <span class="st">"orange"</span>)) <span class="sc">+</span><span class="co"># Set custom colors for EC and LC</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text.y =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),<span class="co"># removes the y-axis facet labels</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">#p_right</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="step-5-combine-your-left-and-right-plots" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-combine-your-left-and-right-plots">Step 5: Combine your left and right plots</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>final_plot <span class="ot">&lt;-</span> p_left <span class="sc">+</span> p_right </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-6-save-your-plot-and-adjust-width-and-height" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-save-your-plot-and-adjust-width-and-height">Step 6: Save your plot and adjust width and height</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"fig9_facetwrap.png"</span>, final_plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your final figure should look like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/fig9_facetwrap.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>As you can see even with adjusted margins this version is a bit harder to manipulate. Different adjustments were attempted but none came out as nice as the “patchwork” option. This was the closest I could get to the manipulation using the facetwrap.</p>
+</section>
+</section>
+<section id="figure-10-frequency-bar-charts" class="level2">
+<h2 class="anchored" data-anchor-id="figure-10-frequency-bar-charts">Figure 10: Frequency Bar Charts</h2>
+<section id="step-1-install-packages-if-needed-and-load-libraries-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-install-packages-if-needed-and-load-libraries-1">Step 1: install packages if needed and load libraries</h3>
+<p>To replicate you will need the following:</p>
+<p>Libraries:</p>
+<ul>
+<li><p>readxl - for reading Excel files</p></li>
+<li><p>dplyr - for data manipulation</p></li>
+<li><p>ggplot2 - for creating data visualizations</p></li>
+<li><p>patchwork - for combining multiple ggplot plots into a single layout</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)       <span class="co"># For reading Excel files</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)        <span class="co"># For data manipulation (filtering, mutating, etc.)</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)      <span class="co"># For creating visualizations</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)    <span class="co"># For combining multiple ggplot plots into a single layout</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("ggthemes")</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes) <span class="co"># for plot theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-load-the-needed-datasets-and-tidyup" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-load-the-needed-datasets-and-tidyup">Step 2: load the needed datasets and tidyup</h3>
+<p>You will need the following data located in the “Data” folder</p>
+<ul>
+<li>MOESM13.xlsx</li>
+<li>MOESM14.xlsx</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ux_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/MOESM13.xlsx"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ix_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/MOESM14.xlsx"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-3-combine-the-two-datasets-and-create-grouping-labels" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-combine-the-two-datasets-and-create-grouping-labels">Step 3: Combine the two datasets and create grouping labels</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(ux_data, ix_data) <span class="sc">|&gt;</span> <span class="co"># Merge the two datasets into one</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">fnd =</span> <span class="fu">toupper</span>(fnd), <span class="co"># Standardize time period column to uppercase, should already be done but just in case</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">site_fnd =</span> <span class="fu">paste</span>(site, fnd) <span class="co"># Create a combined label of site and time </span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-4-recode-the-bedrock-codes-from-numbers-to-names" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-recode-the-bedrock-codes-from-numbers-to-names">Step 4: Recode the bedrock codes from numbers to names</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>bedrock_lut <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"mudstone"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"mixed"</span>)  <span class="co"># Define lookup table for bedrock codes</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bedrock_label =</span> <span class="fu">factor</span>(bedrock_lut[<span class="fu">as.character</span>(bedrock2)], <span class="co"># Apply lookup table</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"mixed"</span>, <span class="st">"mudstone"</span>)), <span class="co"># Set display order </span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">erosion =</span> <span class="fu">as.factor</span>(erosion), <span class="co"># Convert erosion values to categorical</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">soil_s =</span> <span class="fu">as.factor</span>(soil_s)  <span class="co"># Convert soil classification codes to categorical</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-5-create-your-plots" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-create-your-plots">Step 5: Create your plots</h3>
+<p>We will create plots for a total of 3 plots needed for this figure:</p>
+<ol type="1">
+<li>p1 - Bedrock Frequencies</li>
+<li>p2 - Soil Classification Frequencies</li>
+<li>p3 - Erosion Frequencies #### Plot 1</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure all combinations of site_fnd and bedrock_label exist</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_plot1 <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bedrock_label)) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(site_fnd, bedrock_label) <span class="sc">|&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(site_fnd, bedrock_label, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="dv">0</span>))  <span class="co"># Fill missing combos with 0, this ensures that all your bars in your plot are the same width even if they dont have pairs</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>df_plot1<span class="sc">$</span>site_fnd <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_plot1<span class="sc">$</span>site_fnd, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"IKK EC"</span>, <span class="st">"IKK LC"</span>, <span class="st">"UXB LPC"</span>, <span class="st">"UXB EC"</span>, <span class="st">"UXB LC"</span>))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_plot1, <span class="fu">aes</span>(<span class="at">x =</span> site_fnd, <span class="at">y =</span> n, <span class="at">fill =</span> bedrock_label)) <span class="sc">+</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.4</span>), <span class="at">width =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"mudstone"</span> <span class="ot">=</span> <span class="st">"grey70"</span>, <span class="st">"mixed"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>)) <span class="sc">+</span> <span class="co"># custom colors for bars</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bedrock Frequencies"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Number of Occurrences"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hc</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_plot2 <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(soil_s)) <span class="sc">|&gt;</span> <span class="co"># Exclude missing soil classification values</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(site_fnd, soil_s) <span class="sc">|&gt;</span> <span class="co"># Count frequency of each soil type by site and time</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(site_fnd, soil_s, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">0</span>))</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>df_plot2<span class="sc">$</span>site_fnd <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_plot2<span class="sc">$</span>site_fnd, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"IKK EC"</span>, <span class="st">"IKK LC"</span>, <span class="st">"UXB LPC"</span>, <span class="st">"UXB EC"</span>, <span class="st">"UXB LC"</span>))</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_plot2, <span class="fu">aes</span>(<span class="at">x =</span> site_fnd, <span class="at">y =</span> n, <span class="at">fill =</span> soil_s)) <span class="sc">+</span>  <span class="co"># Plot frequency by site/time and soil class</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.6</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  </span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"25"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>,    <span class="co"># Brown for soil class 25</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"26"</span> <span class="ot">=</span> <span class="st">"goldenrod2"</span>,    <span class="co"># Yellow for 26</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"29"</span> <span class="ot">=</span> <span class="st">"forestgreen"</span>,    <span class="co"># Green for 29</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"63"</span> <span class="ot">=</span> <span class="st">"tomato4"</span>)) <span class="sc">+</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Soil Classification Frequencies"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Number of Occurrences"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span>  <span class="co"># Add plot labels</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hc</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df_plot3 <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(erosion)) <span class="sc">|&gt;</span> <span class="co"># Exclude missing erosion values</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(site_fnd, erosion) <span class="sc">|&gt;</span> <span class="co"># Count number of observations per erosion level </span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">complete</span>(site_fnd, erosion, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">0</span>))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>df_plot3<span class="sc">$</span>site_fnd <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_plot3<span class="sc">$</span>site_fnd, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"IKK EC"</span>, <span class="st">"IKK LC"</span>, <span class="st">"UXB LPC"</span>, <span class="st">"UXB EC"</span>, <span class="st">"UXB LC"</span>))</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_plot3, <span class="fu">aes</span>(<span class="at">x =</span> site_fnd, <span class="at">y =</span> n, <span class="at">fill =</span> erosion)) <span class="sc">+</span> <span class="co"># Begin plot </span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.6</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># Bar plot </span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"2"</span> <span class="ot">=</span> <span class="st">"forestgreen"</span>, </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"royalblue3"</span>,    </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"goldenrod2"</span>)) <span class="sc">+</span> </span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Erosion Frequencies"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Number of Occurrences"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span>  <span class="co"># Set title and axis labels</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hc</span>(<span class="at">base_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>final_plot <span class="ot">&lt;-</span> (p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"Images/fig10.png"</span>, final_plot, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your final image should look like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Images/fig10.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="inferential-statistics" class="level1">
+<h1>Inferential Statistics</h1>
+<section id="table-6-kruskal-wallis-tests" class="level2">
+<h2 class="anchored" data-anchor-id="table-6-kruskal-wallis-tests">Table 6: Kruskal-Wallis Tests</h2>
+<section id="step-1-install-packages-if-needed-and-load-libraries-2" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-install-packages-if-needed-and-load-libraries-2">Step 1: install packages if needed and load libraries</h3>
+<p>To replicate you will need the following:</p>
+<p>Libraries:</p>
+<ul>
+<li><p>readxl - for reading Excel files</p></li>
+<li><p>dplyr - for data manipulation</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)   <span class="co"># For reading Excel spreadsheet files</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)    <span class="co"># For data manipulation (filtering, mutating, etc.)</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for additional plot</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-load-the-moesm14-dataset-and-tidyup-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-load-the-moesm14-dataset-and-tidyup-1">Step 2: load the MOESM14 dataset and tidyup</h3>
+<p>You will need the following data located in the “Data” folder</p>
+<ul>
+<li>MOESM13.xlsx</li>
+<li>MOESM14.xlsx</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ux_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/MOESM13.xlsx"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ix_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Data/MOESM14.xlsx"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once your data is loaded we can tidy it up:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>ux_clean <span class="ot">&lt;-</span> ux_data <span class="sc">|&gt;</span> <span class="co"># Load data from Excel file for Uxbenká</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">fnd =</span> <span class="fu">toupper</span>(fnd)) <span class="sc">%&gt;%</span> <span class="co"># Standardize 'fnd' column by converting to uppercase</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(fnd <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"LPC"</span>, <span class="st">"EC"</span>, <span class="st">"LC"</span>)) <span class="co"># Convert the 'fnd' (chronological phase) column to uppercase</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>ix_clean <span class="ot">&lt;-</span>  ix_data <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">fnd =</span> <span class="fu">toupper</span>(fnd)) <span class="sc">|&gt;</span> <span class="co"># Convert the 'fnd' (chronological phase) column to uppercase</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">filter</span>(fnd <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"LPC"</span>, <span class="st">"EC"</span>, <span class="st">"LC"</span>))   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-3-define-variables-to-test" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-define-variables-to-test">Step 3: Define Variables to Test</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"strs"</span>, <span class="st">"str_area"</span>, <span class="st">"area"</span>, <span class="st">"h20"</span>, <span class="st">"zonal_slope"</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>var_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Number of structures"</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Total area of structures"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Plazuela area"</span>,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Distance to water"</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Zonal slope"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-4-create-a-function-to-run-kruskal-wallis-tests-for-a-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-create-a-function-to-run-kruskal-wallis-tests-for-a-dataset">Step 4: Create a function to Run Kruskal-Wallis Tests for a Dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>run_kw_tests <span class="ot">&lt;-</span> <span class="cf">function</span>(data, var_list, <span class="at">group_var =</span> <span class="st">"fnd"</span>) {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(var_list, <span class="cf">function</span>(var) {</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kruskal.test</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(var, <span class="st">"~"</span>, group_var)), <span class="at">data =</span> data)<span class="sc">$</span>p.value</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-5-run-tests-for-ix-kukuil-and-uxbenká" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-run-tests-for-ix-kukuil-and-uxbenká">Step 5: Run Tests for Ix Kuku’il and Uxbenká</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>kw_ix_vals <span class="ot">&lt;-</span> <span class="fu">run_kw_tests</span>(ix_data, variables)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>kw_ux_vals <span class="ot">&lt;-</span> <span class="fu">run_kw_tests</span>(ux_data, variables)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-6-create-final-combined-results-table" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-create-final-combined-results-table">Step 6: Create Final Combined Results Table</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>kw_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Variable =</span> var_names,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Uxbenká p-value"</span> <span class="ot">=</span> kw_ux_vals,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ix Kuku’il p-value"</span> <span class="ot">=</span> kw_ix_vals,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-7-optional-display-as-a-formatted-table-using-knitr" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-optional-display-as-a-formatted-table-using-knitr">Step 7: Optional: Display as a Formatted Table Using knitr</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># Load knitr for table formatting</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>kable_final <span class="ot">&lt;-</span> <span class="fu">kable</span>(kw_table, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">caption =</span> <span class="st">"Table 6: Kruskal-Wallis p-values for Ix Kuku’il and Uxbenká"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>kable_final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your final output table should look like this:</p>
+<p>Table 6: <em>Kruskal-Wallis results. Italicized values are statistically significant (p &lt; 0.05)</em></p>
+<p><img src="Images/table6.png" class="img-fluid"></p>
+<p>While there is no plot or graphic other than a table to represent this in the paper, we can easily create one using ggplot and the table we created like we have earlier in the data analysis replication process.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> kw_table</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape for plotting</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Uxbenká p-value"</span>, <span class="st">"Ix Kuku’il p-value"</span>), <span class="at">names_to =</span> <span class="st">"Site"</span>, <span class="at">values_to =</span> <span class="st">"p_value"</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> p_value, <span class="at">y =</span> Variable, <span class="at">color =</span> Site, <span class="at">shape =</span> Site)) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.05</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"p-value"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Kruskal-Wallis p-values by Variable and Site"</span>) <span class="sc">+</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="DataRepReport_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><img src=".png" class="img-fluid"></p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
