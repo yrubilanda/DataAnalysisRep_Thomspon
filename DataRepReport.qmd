@@ -4,36 +4,45 @@ format: html
 editor: 
   markdown: 
     wrap: 72
-format:
-  pdf:
-    toc: true
-    number-sections: true
-    colorlinks: true
 ---
 
 # Introduction
 
-Household Inequality, Common Formation, and Land Tenure in Classic Periof Lowland Maya Society
+Household Inequality, Common Formation, and Land Tenure in Classic
+Periof Lowland Maya Society
 
 Journal: Journal of Archaeological Method and Theory (2021) 28:1276–1313
 
 Authors:
 
-Amy E. Thompson - Department of Geography and Environmnet, University of Texas at Austin, Austin, TX, USA
+Amy E. Thompson - Department of Geography and Environmnet, University of
+Texas at Austin, Austin, TX, USA
 
-Keith M. Prufer - Department of Anthropology, University of New Mexico, Albuquerque, NM, USA DOI: <https://doi.org/10.1007/s10816-020-09505-3>.
+Keith M. Prufer - Department of Anthropology, University of New Mexico,
+Albuquerque, NM, USA DOI: <https://doi.org/10.1007/s10816-020-09505-3>.
 
 ## Goal of the Original Paper:
 
-The paper aims to understand how access to social and environmental resources influenced household settlement decisions and contributed to structural inequality at the Classic Period Maya sites of Ix Kuku’il and Uxbenká. It tests two models from human behavioral ecology—Ideal Free Distribution (IFD) and Ideal Despotic Distribution (IDD)—to explain the spatial distribution of households.
+The paper aims to understand how access to social and environmental
+resources influenced household settlement decisions and contributed to
+structural inequality at the Classic Period Maya sites of Ix Kuku’il and
+Uxbenká. It tests two models from human behavioral ecology—Ideal Free
+Distribution (IFD) and Ideal Despotic Distribution (IDD)—to explain the
+spatial distribution of households.
 
 ## Data Set Used:
 
-The study uses archaeological data from Ix Kuku’il and Uxbenká, including household foundation dates and nine suitability variables representing environmental (e.g., access to water, farmland quality) and social (e.g., access to roads, labor networks) resources.
+The study uses archaeological data from Ix Kuku’il and Uxbenká,
+including household foundation dates and nine suitability variables
+representing environmental (e.g., access to water, farmland quality) and
+social (e.g., access to roads, labor networks) resources.
 
 ## Analyses Conducted:
 
-The authors: - Correlate foundation dates with environmental and social suitability scores. - Use spatial analysis to examine settlement patterns. - Evaluate the fit of the IFD vs. IDD models. - Visualize trends in household access to resources over time.
+The authors: - Correlate foundation dates with environmental and social
+suitability scores. - Use spatial analysis to examine settlement
+patterns. - Evaluate the fit of the IFD vs. IDD models. - Visualize
+trends in household access to resources over time.
 
 ## Analyses I Will Replicate:
 
@@ -44,7 +53,8 @@ I will replicate the analyses associated with:
 -   [Figure 10: Frequency Bar Charts]\
 -   [Table 6: Kruskal-Wallis Tests]
 
-These replications will help assess how household access to resources changed over time and whether social inequality became more pronounced.
+These replications will help assess how household access to resources
+changed over time and whether social inequality became more pronounced.
 
 # Data Replication
 
@@ -52,9 +62,13 @@ These replications will help assess how household access to resources changed ov
 
 ## Figure 7: Sum of settlement dates using AMS 14C
 
-Figure 7 is a 2 step process with some work needing to be done outside of R Studio in OxCal.
+Figure 7 is a 2 step process with some work needing to be done outside
+of R Studio in OxCal.
 
-**OxCal**, is a specialized scripting language used in **Bayesian chronological modeling** of radiocarbon dates. OxCal is widely used in **archaeology** and **paleoclimatology** to build models that integrate radiocarbon dates, stratigraphy, and other chronological constraints.
+**OxCal**, is a specialized scripting language used in **Bayesian
+chronological modeling** of radiocarbon dates. OxCal is widely used in
+**archaeology** and **paleoclimatology** to build models that integrate
+radiocarbon dates, stratigraphy, and other chronological constraints.
 
 Create a login: <https://c14.arch.ox.ac.uk/oxcal/OxCal.html>
 
@@ -80,7 +94,8 @@ View\>Code
 
 For this we will use the data file MOESM9.xlsx
 
-We need the columns Lab Number (for identification), C14 date, and the +-
+We need the columns Lab Number (for identification), C14 date, and the
++-
 
 Code for IKK
 
@@ -128,7 +143,8 @@ Once you enter code, and select the run button
 
 ![](Images/Step4.png){fig-align="center"}
 
-After you select run a screen to name your project will pop up, enter name and select run.
+After you select run a screen to name your project will pop up, enter
+name and select run.
 
 ### Step 5: Select Graph
 
@@ -233,9 +249,12 @@ Plot()
 
 ![](Images/UXB.png){fig-align="center"}
 
-While the author of the paper further manipulated the image in "inkscape" to overlay them on each other we can attempt something similiar in R
+While the author of the paper further manipulated the image in
+"inkscape" to overlay them on each other we can attempt something
+similiar in R
 
-I attempted to make the figures transparent and overlay them but the final image resulted in the following:
+I attempted to make the figures transparent and overlay them but the
+final image resulted in the following:
 
 ![](Images/IXX.png1.jpeg){fig-align="center"}
 
@@ -253,7 +272,8 @@ Packages:
 
 -   ggplot2 - includes ggplot2 library
 
--   ggpubr - includes ggline for mean plots, includes patchwork for plot combination
+-   ggpubr - includes ggline for mean plots, includes patchwork for plot
+    combination
 
 ```{r}
 if (!require("tidyverse")) {install.packages("tidyverse")}
@@ -287,7 +307,8 @@ You will need the following data located in the "Data" folder
 
 -   MOESM14.xlsx
 
-Some information on reading in excel files: <https://readxl.tidyverse.org/>
+Some information on reading in excel files:
+<https://readxl.tidyverse.org/>
 
 ```{r}
 ix_data <- read_excel("Data/MOESM14.xlsx") #load in data set
@@ -297,9 +318,11 @@ ix_data <- read_excel("Data/MOESM14.xlsx") #load in data set
 head(ix_data) #preview data set to make sure it is loaded in correctly
 ```
 
-Now that our data is loaded in we need to make sure it is tidy for manipulating and working with.
+Now that our data is loaded in we need to make sure it is tidy for
+manipulating and working with.
 
-To recreate figure 7 we will only need certain variables from the data set:
+To recreate figure 7 we will only need certain variables from the data
+set:
 
 -   number of structures
 
@@ -319,7 +342,8 @@ We can call our column names to figure out what we have
 colnames(ix_data) #call column names
 ```
 
-It looks like we have everything we need, however they have different names, make sure you are identifying correctly:
+It looks like we have everything we need, however they have different
+names, make sure you are identifying correctly:
 
 -   number of structures = strs
 
@@ -350,7 +374,10 @@ head(ix_clean) #return the first couple of rows to check data
 
 ### Step 3: Create your Plots
 
-To create our plots we will use ggplot with NO facet wrap, if you prefer to use face wrap scroll down, however the sizing of each individual plot is not as easily manipulated. You can better manipulate your plot sizes with the patchwork library
+To create our plots we will use ggplot with NO facet wrap, if you prefer
+to use face wrap scroll down, however the sizing of each individual plot
+is not as easily manipulated. You can better manipulate your plot sizes
+with the patchwork library
 
 We will create plots for a total of 10 plots needed for this figure:
 
@@ -362,7 +389,8 @@ We will create plots for a total of 10 plots needed for this figure:
 6.  pC2 - Plazuela Area against time (boxplot)
 7.  pD1 - Distance to Water against time (mean and error)
 8.  pD2 - Distance to Water against time (boxplot)
-9.  pE1 - Slope against time (mean and error) 10.PE2 - Slope against time (boxplot)
+9.  pE1 - Slope against time (mean and error) 10.PE2 - Slope against
+    time (boxplot)
 
 #### Plots A1 and A2 - Number of Structures against Time Period
 
@@ -535,7 +563,9 @@ pE2 <- ggplot(ix_clean, # data for plot
 
 ### Step 4: Combine your plots using Patchwork
 
-Now that all our plots are created we will combine them, we will use the patchwork library because this allows us to manipulate each individual graph better
+Now that all our plots are created we will combine them, we will use the
+patchwork library because this allows us to manipulate each individual
+graph better
 
 ```{r}
 # Combine the plots vertically using patchwork
@@ -562,7 +592,10 @@ Your final figure should look like this:
 
 ![](Images/fig9_patchwork.png){fig-align="center"}
 
-*Figure 9: Data points and means (left) and Box-and-whisker plots with errors and outliers (right) showing the trends in suitability variables over time at Ix Kuku’il. Number of structures (a); structure area (b); plazuela area (c); access to water (d); and lidar derived slope (e)*
+*Figure 9: Data points and means (left) and Box-and-whisker plots with
+errors and outliers (right) showing the trends in suitability variables
+over time at Ix Kuku’il. Number of structures (a); structure area (b);
+plazuela area (c); access to water (d); and lidar derived slope (e)*
 
 ## Facetwrap Alternative
 
@@ -645,7 +678,10 @@ Your final figure should look like this:
 
 ![](Images/fig9_facetwrap.png){fig-align="center"}
 
-As you can see even with adjusted margins this version is a bit harder to manipulate. Different adjustments were attempted but none came out as nice as the "patchwork" option. This was the closest I could get to the manipulation using the facetwrap.
+As you can see even with adjusted margins this version is a bit harder
+to manipulate. Different adjustments were attempted but none came out as
+nice as the "patchwork" option. This was the closest I could get to the
+manipulation using the facetwrap.
 
 ## Figure 10: Frequency Bar Charts
 
@@ -888,11 +924,14 @@ kable_final
 
 Your final output table should look like this:
 
-Table 6: *Kruskal-Wallis results. Italicized values are statistically significant (p \< 0.05)*
+Table 6: *Kruskal-Wallis results. Italicized values are statistically
+significant (p \< 0.05)*
 
 ![](Images/table6.png)
 
-While there is no plot or graphic other than a table to represent this in the paper, we can easily create one using ggplot and the table we created like we have earlier in the data analysis replication process.
+While there is no plot or graphic other than a table to represent this
+in the paper, we can easily create one using ggplot and the table we
+created like we have earlier in the data analysis replication process.
 
 ```{r}
 # Create the data
